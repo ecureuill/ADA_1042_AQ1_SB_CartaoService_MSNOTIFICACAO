@@ -1,5 +1,11 @@
 # ADA_1042_AQ1_SB_CartaoService_MSNOTIFICACAO
 
+## Features
+
+- [Criação de Conta](#criação-de-conta-)
+- [Nova compra](#nova-compra-)
+- [Envio de Fatura](#envia-fatura-de-conta)
+
 ## Contratos
 
 ### Criação de conta. 
