@@ -10,7 +10,7 @@ import java.util.function.Supplier;
  * @param <TValue> O tipo de valor do objeto.
  * @param <TThis>  O próprio tipo (subclasse).
  */
-public class ValueObject<TValue, TThis extends ValueObject<TValue, TThis>> {
+public abstract class ValueObject<TValue, TThis extends ValueObject<TValue, TThis>> {
     private TValue value;
     public static final Supplier<? extends ValueObject<?, ?>> FACTORY;
 
