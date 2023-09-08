@@ -1,54 +1,46 @@
 package ada.grupo5.msnotificacao;
 
+import com.sun.jdi.Value;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.Objects;
-import java.util.function.Supplier;
 
-/**
- * Classe base para objetos de valor imutáveis.
- *
- * @param <TValue> O tipo de valor do objeto.
- * @param <TThis>  O próprio tipo (subclasse).
- */
-public abstract class ValueObject<TValue, TThis extends ValueObject<TValue, TThis>> {
+public class ValueObject<TValue, TThis extends ValueObject<TValue, TThis>> {
     private TValue value;
-    public static final Supplier<? extends ValueObject<?, ?>> FACTORY;
 
-    static {
-        try {
-            FACTORY = newInstance();
-        } catch (
-                IllegalAccessException |
-                InstantiationException |
-                NoSuchMethodException |
-                InvocationTargetException e) {
-            throw new ExceptionInInitializerError(e);
-        }
-    }
+    protected ValueObject() {}
 
-    protected void validate() {
-        // Deve ser sobrescrito pelas subclasses.
+    protected ValueObject(TValue item) {
+        value = item;
     }
+    protected void validate() {}
 
     protected boolean tryValidate() {
         return true;
     }
 
-    public static <TValue, TThis extends ValueObject<TValue, TThis>> TThis from(Class<TThis> valueType, TValue item) {
-        TThis x = valueType.cast(FACTORY.get());
-        x.setValue(item);
-        x.validate();
-        return x;
-    }
+    public static <TValue, TThis extends ValueObject<TValue, TThis>> TThis from(TValue item) {
+        try {
+            ValueObject<TValue, TThis> vo = new ValueObject<TValue, TThis>();
 
-    public static <TValue, TThis extends ValueObject<TValue, TThis>> boolean tryFrom(Class<TThis> valueType, TValue item, ValueObject<TValue, TThis>[] result) {
-        TThis x = valueType.cast(FACTORY.get());
-        x.setValue(item);
-        if (x.tryValidate()) {
-            result[0] = x;
-            return true;
+            @SuppressWarnings("unchecked")
+            TThis x = (TThis) vo.getClass()
+                    .getConstructor(item.getClass())
+                    .newInstance(item);
+
+            x.validate();
+
+            return x;
+        } catch (
+                InstantiationException |
+                IllegalAccessException |
+                InvocationTargetException |
+                NoSuchMethodException e) {
+            final var errorMessage =
+                    "There was a error while trying to instantiate";
+
+            throw new RuntimeException(errorMessage, e);
         }
-        return false;
     }
 
     protected void setValue(TValue value) {
@@ -77,19 +69,11 @@ public abstract class ValueObject<TValue, TThis extends ValueObject<TValue, TThi
         return value.toString();
     }
 
-    public static <TValue, TThis extends ValueObject<TValue, TThis>> boolean areEqual(TThis a, TThis b) {
+    public boolean areEqual(TThis a, TThis b) {
         if (a == null && b == null) return true;
         if (a == null || b == null) return false;
         return a.equals(b);
     }
 
-    @SuppressWarnings("unchecked")
-    protected static <TValue, TThis extends ValueObject<TValue, TThis>> TThis newInstance()
-            throws IllegalAccessException,
-            InstantiationException,
-            NoSuchMethodException,
-            InvocationTargetException {
-       return (TThis) ValueObject.class.getDeclaredConstructor().newInstance();
-    }
 
 }

@@ -5,8 +5,8 @@ import ada.grupo5.msnotificacao.enums.ChannelEnum;
 import ada.grupo5.msnotificacao.exceptions.ValidationException;
 
 public class CreditCard extends ValueObject<String, CreditCard> {
-    private final String regex = "\\d{4}";
-    private final String errorMessage = "CreditCard must be a four length numeric sequence.";
+    private final static String regex = "\\d{4}";
+    private final static String errorMessage = "CreditCard must be a four length numeric sequence.";
 
     @Override
     protected void validate() {

@@ -13,3 +13,5 @@ include("app:application")
 findProject(":app:application")?.name = "application"
 include("app:infrastructure")
 findProject(":app:infrastructure")?.name = "infrastructure"
+include("app:application")
+findProject(":app:application")?.name = "application"

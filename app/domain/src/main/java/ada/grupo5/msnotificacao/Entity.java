@@ -9,6 +9,7 @@ public abstract class Entity<ID> {
         Objects.requireNonNull(id, "id should not be null");
         this.id = id;
     }
+
     public ID getId() {
         return id.getValue();
     }
@@ -19,5 +20,10 @@ public abstract class Entity<ID> {
         if (o == null || getClass() != o.getClass()) return false;
         final Entity<?> entity = (Entity<?>) o;
         return getId().equals(entity.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
     }
 }

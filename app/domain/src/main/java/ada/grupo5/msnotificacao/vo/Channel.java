@@ -5,7 +5,7 @@ import ada.grupo5.msnotificacao.enums.ChannelEnum;
 import ada.grupo5.msnotificacao.exceptions.ValidationException;
 
 public class Channel extends ValueObject<String, Channel> {
-    private final String errorMessage = "Channel is not a valid one. Must be 'Email' or 'Sms'";
+    private final static String errorMessage = "Channel is not a valid one. Must be 'Email' or 'Sms'";
 
     @Override
     protected void validate() {
