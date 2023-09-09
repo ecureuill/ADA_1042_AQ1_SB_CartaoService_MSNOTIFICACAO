@@ -3,14 +3,17 @@ package ada.grupo5.msnotificacao;
 import ada.grupo5.msnotificacao.utils.InstantUtils;
 
 import java.time.Instant;
-public abstract class AggregateRoot<ID> extends Entity<ID> {
+public abstract class AggregateRoot <T, ID extends Identifier<T>> extends Entity<T, ID> {
     protected Instant updatedAt;
     protected Instant createdAt;
 
-    protected AggregateRoot(final Identifier<ID> id) {
+    protected AggregateRoot(
+            final ID id,
+            final Instant created,
+            final Instant updated
+    ) {
         super(id);
-        var now = InstantUtils.now();
-        updatedAt = now;
-        createdAt = now;
+        updatedAt = updated;
+        createdAt = created;
     }
 }

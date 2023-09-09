@@ -82,7 +82,7 @@
 // exemplo
 {
     "id": "6f7b5937-0b3a-4a24-8b94-56a36e6a04a7",
-    "document": "12345678901",
+    "document": "51211961052",
     "email": "usuario@example.com",
     "phone": "98764321234",
     "channel": 0,
@@ -91,12 +91,16 @@
     "credit_card": "1234",
     "dependents": [
         {
+            "id": "8a94efff-795f-4cac-98e0-e1a1f529e1bb",
             "name": "Maria da Silva",
-            "document": "98765432101"
+            "document": "18062929043",
+            "credit_card": "2345"
         },
         {
+            "id: "dc7ac9e3-9061-444d-92c3-d3e2be685bc5",
             "name": "Pedro da Silva",
-            "document": "45678912301"
+            "document": "71950950026",
+            "credit_card": "3456"
         }
     ]
 }
@@ -183,6 +187,7 @@
   "buyer_name": "Maria da Silva",
   "buyer_document": "98765432101",
   "buyer_card": "1234",
+  "seller": "ifood",
   "value": 100.50,
   "date": "2023-09-06T15:30:00.000Z"
 }

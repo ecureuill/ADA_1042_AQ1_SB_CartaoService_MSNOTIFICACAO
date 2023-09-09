@@ -1,4 +1,4 @@
-package ada.grupo5.msnotificacao.contracts.accounts;
+package ada.grupo5.msnotificacao.usecases.accounts.contracts;
 
 import ada.grupo5.msnotificacao.enums.ChannelEnum;
 
